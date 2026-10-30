@@ -1,0 +1,21 @@
+{
+ "titre": "e^(2x) = e^x + 2",
+ "chapitre": "Fonction exponentielle",
+ "etapes": [
+  {"tex": "$\\mathrm{e}^{2x}=\\mathrm{e}^{x}+2$", "cles": ["e1", "p2", "x1", "eq", "e2", "x2", "plus", "c2"]},
+  {"tex": "$(\\mathrm{e}^{x})^{2}=\\mathrm{e}^{x}+2$", "cles": ["lp", "e1", "x1", "rp", "p2", "eq", "e2", "x2", "plus", "c2"]},
+  {"tex": "$X^{2}=X+2$", "cles": ["X1", "p2", "eq", "X2", "plus", "c2"]},
+  {"tex": "$X^{2}-X-2=0$", "cles": ["X1", "p2", "m1", "X2", "plus", "c2", "eq", "z0"]},
+  {"tex": "$X=2\\quad\\mathrm{ou}\\quad X=-1$", "cles": ["X1", "eq", "c2", "o", "u", "X2", "eqb", "mb", "one"]},
+  {"tex": "$x=\\ln 2$", "cles": ["X1", "eq", "l", "n", "c2"]}
+ ],
+ "lettres_bleues": ["X"],
+ "encadres": {"etape": 1, "groupes": [["e1", "x1"], ["e2", "x2"]], "vers": ["X1", "X2"]},
+ "barre": {"etape": 4, "cles": ["X2", "eqb", "mb", "one"],
+           "note": {"tex": "$\\mathrm{e}^{x}>0$", "cles": ["ne", "nx", "ngt", "n0"]}},
+ "etiquettes": [
+  {"depuis": 2, "tex": "$X=\\mathrm{e}^{x}$", "cles": ["tX", "teq", "te", "tx"]},
+  {"depuis": 5, "tex": "$\\mathrm{e}^{x}=2$", "cles": ["te", "tx", "teq", "t2"]}
+ ],
+ "verification": {"type": "equation", "equation": "exp(2*x) - exp(x) - 2", "domaine": [-20, 20], "solutions": ["log(2)"]}
+}

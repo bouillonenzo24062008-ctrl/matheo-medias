@@ -1,0 +1,121 @@
+{
+ "titre": "ln(x) + ln(x − 1) = ln 6",
+ "chapitre": "Fonction logarithme",
+ "etapes": [
+  {
+   "tex": "$\\ln x+\\ln(x-1)=\\ln 6$",
+   "cles": [
+    "l1",
+    "n1",
+    "xa",
+    "plus",
+    "l2",
+    "n2",
+    "lp",
+    "xb",
+    "m",
+    "one",
+    "rp",
+    "eq",
+    "l3",
+    "n3",
+    "six"
+   ]
+  },
+  {
+   "tex": "$\\ln(x(x-1))=\\ln 6$",
+   "cles": [
+    "l1",
+    "n1",
+    "lp0",
+    "xa",
+    "lp",
+    "xb",
+    "m",
+    "one",
+    "rp",
+    "rp0",
+    "eq",
+    "l3",
+    "n3",
+    "six"
+   ]
+  },
+  {
+   "tex": "$x(x-1)=6$",
+   "cles": [
+    "xa",
+    "lp",
+    "xb",
+    "m",
+    "one",
+    "rp",
+    "eq",
+    "six"
+   ]
+  },
+  {
+   "tex": "$x^{2}-x-6=0$",
+   "cles": [
+    "xa",
+    "p2",
+    "m",
+    "xb",
+    "m6",
+    "six",
+    "eq",
+    "z0"
+   ]
+  },
+  {
+   "tex": "$x=3\\quad\\mathrm{ou}\\quad x=-2$",
+   "cles": [
+    "xa",
+    "eq",
+    "c3",
+    "o",
+    "u",
+    "xb",
+    "eqb",
+    "mb",
+    "c2"
+   ]
+  },
+  {
+   "tex": "$x=3$",
+   "cles": [
+    "xa",
+    "eq",
+    "c3"
+   ]
+  }
+ ],
+ "barre": {
+  "etape": 4,
+  "cles": [
+   "xb",
+   "eqb",
+   "mb",
+   "c2"
+  ],
+  "note": {
+   "tex": "$x>1$",
+   "cles": [
+    "nx",
+    "ngt",
+    "n1"
+   ]
+  }
+ },
+ "verification": {
+  "type": "equation",
+  "equation": "log(x) + log(x - 1) - log(6)",
+  "domaine": [
+   1.000001,
+   60
+  ],
+  "solutions": [
+   "3"
+  ]
+ }
+}

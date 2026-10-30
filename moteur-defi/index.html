@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mathéo Plus · Le défi</title>
+<!--
+  Moteur d'animation de la pub « Le défi » (Mathéo Plus, 8 s), entièrement générée par le code.
+  Textes, instants et réglages : config.json.  Formules : python formules.py.
+  Rendu : python rendre.py   Aperçu : python rendre.py --navigateur
+-->
+<style>
+@font-face{font-family:"MatheoDisplay";src:url(assets/fonts/InterDisplay-Medium.otf);font-weight:500}
+@font-face{font-family:"MatheoDisplay";src:url(assets/fonts/InterDisplay-SemiBold.otf);font-weight:600}
+@font-face{font-family:"MatheoDisplay";src:url(assets/fonts/InterDisplay-Bold.otf);font-weight:700}
+@font-face{font-family:"MatheoDisplay";src:url(assets/fonts/InterDisplay-ExtraBold.otf);font-weight:800}
+html,body{margin:0;background:#000}
+*{box-sizing:border-box}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000;color:#fff;
+  font-family:"MatheoDisplay","Inter Display","Inter",system-ui,sans-serif}
+#world{position:absolute;inset:0;transform-origin:540px 880px}
+#glow{position:absolute;inset:0;opacity:0;background:
+  radial-gradient(ellipse 70% 40% at 50% 46%,rgba(61,123,255,.30),transparent 70%),
+  radial-gradient(ellipse 110% 55% at 50% -10%,rgba(61,123,255,.22),transparent 70%),
+  radial-gradient(ellipse 90% 45% at 50% 115%,rgba(67,56,202,.28),transparent 70%)}
+#cv{position:absolute;left:0;top:0;width:1080px;height:1920px}
+svg.eq{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:visible}
+#eqMain{transform-origin:540px 960px}
+.L{position:absolute;inset:0}
+.ln{position:absolute;left:0;width:1080px;text-align:center;font-weight:800;line-height:1;white-space:nowrap}
+.ln .fit{display:inline-block;white-space:nowrap;line-height:1}
+.ln .fit span{display:inline-block;white-space:pre}
+.tr .fit{letter-spacing:var(--ls);padding-left:var(--ls)}
+.acc{color:var(--accent)}
+/* le défi */
+#S1{transform-origin:540px 560px}
+#q1 .fit{font-size:180px;letter-spacing:-.035em}
+#q2 .fit{font-size:140px;letter-spacing:-.03em}
+#q1 .fit,#q2 .fit{text-shadow:0 8px 50px rgba(0,0,0,.85)}
+/* la marque */
+.logo{position:absolute;left:465px;width:150px;height:150px}
+.logo img{width:100%;height:100%;display:block}
+.shineWrap{position:absolute;inset:0;-webkit-mask-image:url(assets/logo.png);mask-image:url(assets/logo.png);-webkit-mask-size:100% 100%;mask-size:100% 100%;overflow:hidden}
+.shineWrap b{position:absolute;top:-20%;left:0;width:45%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg)}
+#f1 .fit,#f2 .fit{font-size:200px;letter-spacing:-.03em}
+#f1 .fit{text-shadow:0 8px 60px rgba(0,0,0,.7)}
+#f2 .fit{color:var(--accent);text-shadow:0 0 40px var(--electric),0 0 100px var(--electric)}
+#slogan .fit{font-size:66px;letter-spacing:.01em;text-shadow:0 0 26px rgba(61,123,255,.7),0 6px 30px rgba(0,0,0,.8)}
+#slogan .fit span.acc{text-shadow:0 0 30px var(--electric)}
+#fDispo .fit{font-size:48px;font-weight:800;--ls:.12em;color:#fff;text-shadow:0 0 22px rgba(61,123,255,.8)}
+#dot{display:inline-block;width:.42em;height:.42em;border-radius:50%;margin-right:.55em;vertical-align:.155em;background:var(--accent);
+  box-shadow:0 0 0 .12em rgba(141,182,255,.25),0 0 18px var(--electric)}
+#fBar{position:absolute;left:540px;height:4px;width:0;transform:translateX(-50%);border-radius:4px;
+  background:linear-gradient(90deg,transparent,var(--accent) 25%,#fff 50%,var(--accent) 75%,transparent);box-shadow:0 0 20px var(--electric)}
+.box{position:absolute;left:0;width:1080px;display:flex;justify-content:center}
+#cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:20px;height:122px;padding:0 54px;border-radius:999px;background:#fff;color:#050818;
+  font-weight:800;font-size:52px;letter-spacing:.02em;white-space:nowrap;box-shadow:0 0 0 6px rgba(61,123,255,.35),0 20px 80px -10px var(--electric);transform-origin:50% 50%}
+#cta svg{width:44px;height:44px;color:var(--electric);flex:none}
+#ctaShine{position:absolute;top:-10%;left:0;width:28%;height:120%;background:linear-gradient(90deg,transparent,rgba(61,123,255,.38),transparent);transform:translateX(-150%) skewX(-20deg)}
+#url{display:inline-flex;align-items:center;gap:16px;height:88px;padding:0 42px;border-radius:999px;background:rgba(61,123,255,.16);white-space:nowrap;
+  box-shadow:inset 0 0 0 3px rgba(141,182,255,.55);font-weight:700;font-size:48px;transform-origin:50% 50%}
+#url svg{width:38px;height:38px;flex:none}
+#flash{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 46%,#fff 0%,rgba(190,212,255,.85) 18%,rgba(61,123,255,.45) 42%,rgba(0,0,0,0) 72%)}
+#grain{position:absolute;inset:-64px;pointer-events:none;background-image:url(assets/grain.png);background-size:256px 256px;opacity:.07;mix-blend-mode:overlay}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 46%,transparent 55%,rgba(0,0,0,.6) 100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="glow"></div>
+    <canvas id="cv" width="1080" height="1920"></canvas>
+    <svg class="eq" id="eqTag" viewBox="0 0 1080 1920"></svg>
+    <svg class="eq" id="eqNote" viewBox="0 0 1080 1920"></svg>
+    <svg class="eq" id="eqMain" viewBox="0 0 1080 1920"></svg>
+    <div class="L" id="S1"><div class="ln" id="q1"><span class="fit"></span></div><div class="ln" id="q2"><span class="fit"></span></div></div>
+    <div class="L" id="S3">
+      <div class="logo" id="fLogo"><img id="fLogoImg" alt=""><div class="shineWrap"><b id="fShine"></b></div></div>
+      <div class="ln" id="f1"><span class="fit"></span></div>
+      <div class="ln" id="f2"><span class="fit"></span></div>
+      <div class="ln" id="slogan"><span class="fit"><span id="sl1"></span><span> </span><span id="sl2" class="acc"></span></span></div>
+      <div class="ln tr" id="fDispo"><span class="fit"><i id="dot"></i><span id="dispoT"></span></span></div><div id="fBar"></div>
+      <div class="box" id="ctabox"><div id="cta"><span id="ctaText"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg><i id="ctaShine"></i></div></div>
+      <div class="box" id="urlbox"><div id="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5s-1.3 6.7-3.9 9.5c-2.6-2.8-3.9-6-3.9-9.5s1.3-6.7 3.9-9.5z"/></svg><span id="urlText"></span></div></div>
+    </div>
+  </div>
+  <div id="flash"></div><div id="grain"></div><div id="vig"></div>
+</div>
+<script>
+(async () => {
+const get = async p => (await fetch(p, {cache: "no-store"})).json();
+const CFG = await get("config.json"), DF = await get("assets/defi.json");
+const $ = id => document.getElementById(id);
+const cl=(v,a=0,b=1)=>v<a?a:v>b?b:v, pr=(t,a,b)=>cl((t-a)/(b-a)), lerp=(a,b,p)=>a+(b-a)*p;
+const E={o3:p=>1-Math.pow(1-p,3),o5:p=>1-Math.pow(1-p,5),i3:p=>p*p*p,i2:p=>p*p,io3:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,
+  back:p=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2);}};
+const S=(el,o,tf,f)=>{el.style.opacity=o;el.style.visibility=o<=.003?"hidden":"visible";if(tf!==undefined)el.style.transform=tf;if(f!==undefined)el.style.filter=f;};
+for(const [k,v] of Object.entries(CFG.colors)) document.documentElement.style.setProperty("--"+k,v);
+const COL=CFG.colors, TL=CFG.timeline, TX=CFG.texts, D=CFG.duration, SW=CFG.safeWidth||790;
+const SEQ=TL.etapes, TB=TL.barre, TLUM=TL.lumiere, TM=TL.marque, [M1,M2]=TL.mots, TF=TL.final, TC=TL.cta, TE=TL.fin;
+const T_ETAPE=Object.fromEntries(SEQ.map(([n,t])=>[n,t]));
+const ANS=DF.reponse, TG=T_ETAPE[ANS], TS1=SEQ[1][1], BAR=DF.barre||null, ENC=DF.encadres||null, TAGS=DF.etiquettes||[], BLEUS=new Set(DF.bleus||[]);
+const TAGN=new Set(TAGS.map(x=>x.nom)), TT0=TAGS.length?T_ETAPE[TAGS[0].depuis]:1e9;
+const CAP=1490/2048, CT=(1-(1984+494)/2048)/2+1984/2048-CAP;   // Inter Display, interligne 1
+let seed=23; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+
+/* ---------- textes ---------- */
+function rich(el,text,{split=null}={}){
+  el.innerHTML=""; const out=[];
+  text.split(/(\*\*.+?\*\*)/).filter(Boolean).forEach(part=>{
+    const acc=part.startsWith("**"); const t=acc?part.slice(2,-2):part;
+    const units = split==="char" ? [...t] : [t];
+    units.forEach(u=>{ const s=document.createElement("span"); if(acc)s.className="acc"; s.textContent=u; el.appendChild(s); out.push(s); });
+  });
+  return out;
+}
+const fitOf=id=>$(id).querySelector(".fit");
+rich(fitOf("q1"),TX.defi[0]); rich(fitOf("q2"),TX.defi[1]);
+const f1C=rich(fitOf("f1"),TX.nom[0],{split:"char"}), f2C=rich(fitOf("f2"),TX.nom[1],{split:"char"});
+$("sl1").textContent=TX.slogan[0].replace(/\*\*/g,""); $("sl2").textContent=TX.slogan[1].replace(/\*\*/g,"");
+const dispoC=rich($("dispoT"),TX.disponible,{split:"char"});
+$("ctaText").textContent=TX.cta; $("urlText").textContent=CFG.url; $("fLogoImg").src=CFG.logo;
+await document.fonts.ready;
+const base=el=>{ if(!el.dataset.fs) el.dataset.fs=parseFloat(getComputedStyle(el).fontSize); return +el.dataset.fs; };
+function fit(el,max,exact=false){ let f=base(el); el.style.fontSize=f+"px";
+  for(let k=0;k<5;k++){ const w=el.offsetWidth; if(!exact&&w<=max) break; if(exact&&Math.abs(w-max)<2) break; f*=max/w*(exact?1:.997); el.style.fontSize=f+"px"; }
+  if(el.offsetWidth>max){ f*=max/el.offsetWidth*.995; el.style.fontSize=f+"px"; } return f; }
+function fitGroup(els,max){ const f=Math.min(...els.map(e=>fit(e,max))); els.forEach(e=>e.style.fontSize=f+"px"); return f; }
+fit(fitOf("q1"),SW-10,true); fit(fitOf("q2"),SW-10,true);        // le défi en bloc justifié
+fitGroup([fitOf("f1"),fitOf("f2")],SW-40); fit(fitOf("slogan"),SW); fit(fitOf("fDispo"),SW); fit($("cta"),SW); fit($("url"),SW);
+const ff=id=>parseFloat(fitOf(id).style.fontSize);
+const topOf=(id,y)=>y-CT*ff(id);                               // haut de la ligne pour un sommet de capitales en y
+// le défi : bloc centré vers y = 560
+const Q={}; { const f1=ff("q1"), f2=ff("q2"), g=.22*f2, h=CAP*(f1+f2)+g, y=560-h/2; Q.q1=topOf("q1",y); Q.q2=topOf("q2",y+CAP*f1+g); $("q1").style.top=Q.q1+"px"; $("q2").style.top=Q.q2+"px"; }
+// la marque : deux mises en page, la première (nom + slogan) glisse vers la seconde (nom + appel à l'action)
+function layout(withCta,center){ const fn=ff("f1"), L=150, fs=withCta?ff("fDispo"):ff("slogan");
+  const parts=withCta?[L,64,CAP*fn,.2*fn,CAP*fn,76,CAP*fs,62,122,30,88]:[L,64,CAP*fn,.2*fn,CAP*fn,84,CAP*fs];
+  let y=center-parts.reduce((a,b)=>a+b)/2; const o={};
+  o.logo=y; y+=L+64; o.f1=topOf("f1",y); const a=y; y+=CAP*fn+.2*fn; o.f2=topOf("f2",y); y+=CAP*fn; o.nameC=(a+y)/2; y+=withCta?76:84;
+  o.line=y; o.slogan=topOf("slogan",y); o.dispo=topOf("fDispo",y); o.bar=y+CAP*fs+24; y+=CAP*fs+62; o.cta=y; y+=152; o.url=y; return o; }
+const LA=layout(false,840), LB=layout(true,790);
+
+/* ---------- les formules : chaque glyphe glisse d'une étape à la suivante ---------- */
+const NS="http://www.w3.org/2000/svg", ET=DF.etapes, PATHS=DF.chemins, BOX=DF.boites;
+const Y_EQ=1010, MD=.26;
+const GEO={}; for(const n of Object.keys(ET)){ const e=ET[n], w=e.x1-e.x0;
+  let k=Math.min(1.5,780/w), base=Y_EQ, cx=540;
+  if(n===ANS){ k=Math.min(2.0,820/w); base=1060; }
+  if(TAGN.has(n)){ k=Math.min(.78,620/w); base=790; }
+  if(n==="N"){ k=Math.min(.62,420/w); }
+  GEO[n]={k,base,cx,mid:(e.x0+e.x1)/2}; }
+function place(n,g){ const G=GEO[n]; return {X:G.cx+G.k*(g.x-G.mid), Y:G.base-G.k*g.y, s:G.k*g.s}; }
+function bboxOf(n,keys,dx=0,dy=0){ let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  for(const g of ET[n].glyphes){ if(keys&&!keys.includes(g.k)) continue; const p=place(n,g), b=BOX[g.g];
+    x0=Math.min(x0,p.X+b[0]*p.s); x1=Math.max(x1,p.X+b[2]*p.s); y0=Math.min(y0,p.Y-b[3]*p.s); y1=Math.max(y1,p.Y-b[1]*p.s); }
+  return [x0+dx,y0+dy,x1+dx,y1+dy]; }
+// la note « eˣ > 0 » se place sous « X = −1 »
+if(BAR&&BAR.note){ const b=bboxOf(BAR.etape,BAR.cles), hw=GEO.N.k*(ET.N.x1-ET.N.x0)/2; GEO.N.cx=Math.max(110+hw,Math.min(970-hw,(b[0]+b[2])/2)); GEO.N.base=b[3]+95; }
+const POOL={};
+function glyphEl(svg,key,gid){ const id=svg.id+key+"|"+gid; if(!POOL[id]){ const p=document.createElementNS(NS,"path"); p.setAttribute("d",PATHS[gid]); svg.appendChild(p); POOL[id]={p,svg}; } return POOL[id].p; }
+const strike=document.createElementNS(NS,"line"); strike.setAttribute("stroke",COL.accent); strike.setAttribute("stroke-width","7"); strike.setAttribute("stroke-linecap","round"); $("eqMain").appendChild(strike);
+const isX=gid=>BLEUS.has(gid);   // la lettre X (la nouvelle inconnue) est en bleu
+let used=new Set();
+function drawGlyph(svg,key,gid,X,Y,s,o,fill){ if(o<=.003) return; const p=glyphEl(svg,key,gid); used.add(p);
+  p.setAttribute("transform",`translate(${X.toFixed(1)} ${Y.toFixed(1)}) scale(${s.toFixed(4)} ${(-s).toFixed(4)})`); p.setAttribute("fill",fill); p.style.opacity=o.toFixed(3); p.style.display=""; }
+// dessine la transition entre deux étapes (ou une étape seule si A = B)
+function morph(svg,A,B,q,{dim=null,col=null}={}){
+  const ga=A?Object.fromEntries(ET[A].glyphes.map(g=>[g.k,g])):{}, gb=B?Object.fromEntries(ET[B].glyphes.map(g=>[g.k,g])):{};
+  const keys=new Set([...Object.keys(ga),...Object.keys(gb)]);
+  for(const k of keys){ const a=ga[k], b=gb[k], fillOf=g=>col?col(k,g.g):(isX(g.g)?COL.accent:"#fff"), dm=dim?dim(k):1;
+    if(a&&b){ const pa=place(A,a), pb=place(B,b), dx=pb.X-pa.X, arc=Math.abs(dx)>110?Math.sin(Math.PI*q)*Math.min(90,Math.abs(dx)*.22)*(dx<0?-1:1):0;
+      const X=lerp(pa.X,pb.X,q), Y=lerp(pa.Y,pb.Y,q)+arc;
+      if(a.g===b.g) drawGlyph(svg,k,b.g,X,Y,lerp(pa.s,pb.s,q),dm,fillOf(b));
+      else { drawGlyph(svg,k,a.g,X,Y,lerp(pa.s,pb.s,q),(1-E.o3(q))*dm,fillOf(a)); drawGlyph(svg,k,b.g,X,Y,lerp(pa.s,pb.s,q),E.o3(q)*dm,fillOf(b)); } }
+    else if(a){ const pa=place(A,a), o=1-E.o3(cl(q*1.7)); drawGlyph(svg,k,a.g,pa.X,pa.Y-24*q,pa.s*(1-.3*q),o*dm,fillOf(a)); }
+    else { const pb=place(B,b), u=pr(q,.25,1), o=E.o3(u); drawGlyph(svg,k,b.g,pb.X,pb.Y+26*(1-u),pb.s*(1+.45*(1-E.o3(u))),o*dm,fillOf(b)); } }
+}
+// cadrage de l'équation : elle surgit à la première image, la caméra pousse doucement, la réponse grossit puis se change en lumière
+function eqTf(t){ const hk=E.o5(pr(t,0,.22)), push=1+.04*E.io3(pr(t,0,TG)), lum=pr(t,TLUM,TLUM+.14);
+  const ans=t>=TG?1+.06*E.o3(pr(t,TG,TG+.5))+.12*E.i3(lum):1;
+  return {sc:lerp(1.08,1,hk)*push*ans, ox:540, oy:t>=TG?1000:960, hk, lum}; }
+const tfP=(T,x,y)=>[T.ox+(x-T.ox)*T.sc,T.oy+(y-T.oy)*T.sc], tfB=(T,b)=>{const a=tfP(T,b[0],b[1]),c=tfP(T,b[2],b[3]);return [a[0],a[1],c[0],c[1]];};
+function rEq(t){
+  used=new Set();
+  // étape courante de la résolution
+  let i=0; for(let j=0;j<SEQ.length;j++) if(t>=SEQ[j][1]) i=j;
+  const cur=SEQ[i][0], prev=i>0?SEQ[i-1][0]:cur, q=i>0?E.io3(pr(t,SEQ[i][1],SEQ[i][1]+MD)):1;
+  const struck=k=>!!BAR&&BAR.cles.includes(k);
+  const dimF=k=>struck(k)?lerp(1,.32,E.o3(pr(t,TB+.08,TB+.3))):1;
+  const gone=E.i2(pr(t,TLUM+.08,TM+.02));
+  if(t<TM+.05) morph($("eqMain"),prev,cur,q,{dim:BAR&&(cur===BAR.etape||prev===BAR.etape)?dimF:null});
+  // la ligne qui barre X = −1
+  if(BAR&&cur===BAR.etape&&t>=TB){ const b=bboxOf(BAR.etape,BAR.cles), p=E.o3(pr(t,TB,TB+.18)), ym=(b[1]+b[3])/2+6;
+    strike.setAttribute("x1",(b[0]-14).toFixed(1)); strike.setAttribute("y1",(ym+12).toFixed(1)); strike.setAttribute("x2",lerp(b[0]-14,b[2]+14,p).toFixed(1)); strike.setAttribute("y2",lerp(ym+12,ym-12,p).toFixed(1));
+    strike.style.display=""; strike.style.opacity=(1-pr(t,TG,TG+.15)).toFixed(3); } else strike.style.display="none";
+  // « X = eˣ » au-dessus, qui devient « eˣ = 2 » avec la réponse
+  if(t>=TT0&&t<TM){ let j=0; for(let i=0;i<TAGS.length;i++) if(t>=T_ETAPE[TAGS[i].depuis]) j=i; const out=1-pr(t,TLUM-.05,TLUM+.1);
+    if(j===0) morph($("eqTag"),null,TAGS[0].nom,pr(t,TT0+.12,TT0+.4)); else { const tj=T_ETAPE[TAGS[j].depuis]; morph($("eqTag"),TAGS[j-1].nom,TAGS[j].nom,E.io3(pr(t,tj,tj+MD))); }
+    $("eqTag").style.opacity=out.toFixed(3); }
+  // « eˣ > 0 » sous la solution impossible
+  if(BAR&&BAR.note&&t>=TB&&t<TG+.2){ morph($("eqNote"),null,"N",pr(t,TB+.03,TB+.2),{col:()=>COL.accent}); $("eqNote").style.opacity=(1-pr(t,TG,TG+.15)).toFixed(3); }
+  for(const {p} of Object.values(POOL)) if(!used.has(p)) p.style.display="none";
+  // l'équation surgit à la première image, puis la caméra pousse doucement ; la réponse se change en lumière
+  const T=eqTf(t), hk=T.hk, lum=T.lum, blur=(1-hk)*3+gone*16;
+  const em=$("eqMain"); em.style.transformOrigin=`${T.ox}px ${T.oy}px`;
+  S(em,1-gone,`scale(${T.sc.toFixed(4)})`,`${blur>.2?`blur(${blur.toFixed(1)}px) `:""}drop-shadow(0 0 ${(14+30*lum+(1-hk)*30).toFixed(0)}px rgba(61,123,255,${(.75+.25*lum).toFixed(2)}))`);
+  $("eqMain").style.display=t<TM+.05?"":"none"; $("eqTag").style.display=t>=TT0&&t<TM?"":"none"; $("eqNote").style.display=BAR&&BAR.note&&t>=TB&&t<TG+.2?"":"none";
+  $("eqTag").style.filter="drop-shadow(0 0 14px rgba(61,123,255,.8))"; $("eqNote").style.filter="drop-shadow(0 0 12px rgba(61,123,255,.8))";
+}
+
+/* ---------- toile : grille, lumière, encadrés, étincelles ---------- */
+const cv=$("cv"), g=cv.getContext("2d");
+const grid=document.createElement("canvas"); grid.width=1400; grid.height=2400;
+{ const c=grid.getContext("2d"); c.strokeStyle="rgba(141,182,255,1)"; c.lineWidth=2;
+  for(let x=0;x<=1400;x+=90){ c.beginPath(); c.moveTo(x,0); c.lineTo(x,2400); c.stroke(); }
+  for(let y=0;y<=2400;y+=90){ c.beginPath(); c.moveTo(0,y); c.lineTo(1400,y); c.stroke(); }
+  c.globalCompositeOperation="destination-in"; const m=c.createRadialGradient(700,1200,0,700,1200,1050); m.addColorStop(0,"rgba(0,0,0,1)"); m.addColorStop(1,"rgba(0,0,0,0)"); c.fillStyle=m; c.fillRect(0,0,1400,2400); }
+const DUST=Array.from({length:110},()=>({x:rnd()*1080,y:rnd()*1920,z:.25+rnd()*.9,s:.8+rnd()*2.6,ph:rnd()*6.28,an:rnd()*6.28}));
+const SPARK=Array.from({length:70},()=>({an:rnd()*6.283,v:.4+rnd()*.9,w:1.5+rnd()*3,c:rnd()}));
+const RING=Array.from({length:36},()=>({an:rnd()*6.283,v:.6+rnd()*.7,w:1+rnd()*2.5,L:.1+rnd()*.25,c:rnd()}));
+function rays(cx,cy,a,rot,n=14){
+  if(a<=.01) return; g.save(); g.globalCompositeOperation="lighter";
+  for(let i=0;i<n;i++){ const an=rot+i*(Math.PI*2/n)+Math.sin(i*7.1)*.2, w=.05+.04*Math.sin(i*3.7+1)**2, R=1700;
+    const gr=g.createRadialGradient(cx,cy,0,cx,cy,R); gr.addColorStop(0,`rgba(120,160,255,${(a*.32).toFixed(3)})`); gr.addColorStop(.35,`rgba(61,123,255,${(a*.12).toFixed(3)})`); gr.addColorStop(1,"rgba(61,123,255,0)");
+    g.fillStyle=gr; g.beginPath(); g.moveTo(cx,cy); g.arc(cx,cy,R,an-w,an+w); g.closePath(); g.fill(); }
+  const core=g.createRadialGradient(cx,cy,0,cx,cy,420); core.addColorStop(0,`rgba(170,200,255,${(a*.35).toFixed(3)})`); core.addColorStop(1,"rgba(61,123,255,0)");
+  g.fillStyle=core; g.beginPath(); g.arc(cx,cy,420,0,6.283); g.fill(); g.restore(); }
+function glowLine(x0,y0,x1,y1,w,col,a,blur=18){ if(a<=.003) return; g.save(); g.globalCompositeOperation="lighter"; g.strokeStyle=col; g.globalAlpha=Math.min(1,a); g.lineWidth=w; g.shadowColor=COL.electric; g.shadowBlur=blur;
+  g.beginPath(); g.moveTo(x0,y0); g.lineTo(x1,y1); g.stroke(); g.restore(); }
+function rrect(x0,y0,x1,y1,r){ g.beginPath(); g.moveTo(x0+r,y0); g.arcTo(x1,y0,x1,y1,r); g.arcTo(x1,y1,x0,y1,r); g.arcTo(x0,y1,x0,y0,r); g.arcTo(x0,y0,x1,y0,r); g.closePath(); }
+function hiBox(b,a,pad=18){ if(a<=.003) return; g.save(); g.globalAlpha=a; rrect(b[0]-pad,b[1]-pad,b[2]+pad,b[3]+pad,22); g.fillStyle="rgba(61,123,255,.20)"; g.fill();
+  g.strokeStyle=COL.accent; g.lineWidth=4; g.shadowColor=COL.electric; g.shadowBlur=22; g.stroke(); g.restore(); }
+function boxDraw(b,p,a,pad=44){ // cadre dessiné d'un trait continu autour de la réponse
+  if(a<=.003||p<=0) return; const x0=b[0]-pad,y0=b[1]-pad,x1=b[2]+pad,y1=b[3]+pad, W=x1-x0,H=y1-y0, per=2*(W+H);
+  g.save(); g.globalCompositeOperation="lighter"; g.globalAlpha=a; rrect(x0,y0,x1,y1,34); g.setLineDash([per*p,per]); g.lineDashOffset=0;
+  g.strokeStyle="#fff"; g.lineWidth=6; g.shadowColor=COL.electric; g.shadowBlur=30; g.stroke(); g.setLineDash([]);
+  g.globalAlpha=a*E.o3(pr(p,.6,1))*.5; rrect(x0,y0,x1,y1,34); const gr=g.createLinearGradient(0,y0,0,y1); gr.addColorStop(0,"rgba(61,123,255,.35)"); gr.addColorStop(1,"rgba(61,123,255,.05)"); g.fillStyle=gr; g.fill(); g.restore(); }
+
+function drawCanvas(t){
+  g.clearRect(0,0,1080,1920); g.lineCap="round";
+  const brand=t>=TM;
+  // grille de papier millimétré qui dérive doucement (le défi)
+  const ga=(t<.05?.5:.11)*(1-pr(t,TLUM,TM)); if(ga>0){ const z=1+.06*t; g.save(); g.globalAlpha=ga; g.translate(540,960); g.scale(z,z); g.translate(-700,-1200+((t*14)%90)); g.drawImage(grid,0,0); g.restore(); }
+  // rayons de lumière
+  let ra=.14+.06*pr(t,0,TG); if(t>=TG) ra=lerp(.2,.42,pr(t,TG,TM));
+  if(brand){ ra=lerp(1,.45,E.o3(pr(t,TM,TM+1.3))); if(t>=TF) ra=lerp(.45,.55,pr(t,TF,TF+.5)); if(t>=TE) ra=lerp(.85,.55,E.o3(pr(t,TE,TE+.5))); }
+  const nameC=lerp(LA.nameC,LB.nameC,E.io3(pr(t,TF-.15,TF+.25)));
+  rays(540,brand?nameC:(t>=TG?1000:960),ra,t*.18);
+  // poussière lumineuse ; elle se rassemble sur la réponse avant la révélation, puis explose
+  g.save(); g.globalCompositeOperation="lighter";
+  const conv=E.i3(pr(t,TG+.3,TM)), burst=brand?E.o3(pr(t,TM,TM+1.2)):0;
+  for(const d of DUST){ let x=d.x+Math.sin(t*.7+d.ph)*20*d.z, y=((d.y-t*55*d.z)%1920+1920)%1920;
+    if(conv>0&&!brand){ x=lerp(x,540,conv); y=lerp(y,1000,conv); }
+    if(burst>0){ x=540+Math.cos(d.an)*burst*900*d.z; y=nameC+Math.sin(d.an)*burst*1300*d.z; }
+    const a=(.1+.25*d.z)*(.55+.45*Math.sin(t*3+d.ph))*(1+conv*1.5);
+    g.fillStyle=`rgba(170,200,255,${Math.min(1,a).toFixed(3)})`; g.beginPath(); g.arc(x,y,d.s*d.z,0,6.283); g.fill(); }
+  g.restore();
+  // onde de choc à la première image
+  { const p=pr(t,0,.5); if(p<1){ g.save(); g.globalCompositeOperation="lighter"; g.strokeStyle=`rgba(141,182,255,${(.8*(1-p)).toFixed(3)})`; g.lineWidth=lerp(14,2,p); g.shadowColor=COL.electric; g.shadowBlur=30;
+    g.beginPath(); g.ellipse(540,950,lerp(470,1100,E.o3(p)),lerp(140,620,E.o3(p)),0,0,6.283); g.stroke(); g.restore(); }
+    for(const s of RING){ const pp=pr(t,0,.45); if(pp<=0||pp>=1) continue; const r1=lerp(80,1200,E.o3(pp))*s.v, r0=r1*(1-s.L*(1.6-pp));
+      glowLine(540+Math.cos(s.an)*r0,960+Math.sin(s.an)*r0*.75,540+Math.cos(s.an)*r1,960+Math.sin(s.an)*r1*.75,s.w,s.c>.5?"#fff":COL.accent,(1-pp)*.85,12); } }
+  // encadrés : les deux eˣ deviennent X
+  if(ENC){ const b1=T_ETAPE[ENC.etape], c1=T_ETAPE[ENC.suivante];
+    if(t>=b1+.12&&t<c1+.5){ const ap=E.back(pr(t,b1+.14,b1+.32)), mv=E.io3(pr(t,c1,c1+MD)), fade=1-pr(t,c1+.22,c1+.45);
+      ENC.groupes.forEach((grp,gi)=>{ const A=bboxOf(ENC.etape,grp), B=bboxOf(ENC.suivante,[ENC.vers[gi]]); const bx=tfB(eqTf(t),A.map((v,i)=>lerp(v,B[i],mv)));
+        const cx=(bx[0]+bx[2])/2, cy=(bx[1]+bx[3])/2, s=cl(ap,0,1.2); hiBox([cx+(bx[0]-cx)*s,cy+(bx[1]-cy)*s,cx+(bx[2]-cx)*s,cy+(bx[3]-cy)*s],cl(ap*1.5)*fade,16); }); } }
+  // la réponse : cadre dessiné d'un trait, puis tout se change en lumière
+  if(t>=TG&&t<TM+.1){ const T=eqTf(t), bb=tfB({...T,sc:T.sc/(1+.12*E.i3(T.lum))},bboxOf(ANS)), cx=540, cy=1000, ex=E.o3(pr(t,TLUM,TM+.1));
+    const grow=1+ex*.5, bg=[cx+(bb[0]-cx)*grow,cy+(bb[1]-cy)*grow,cx+(bb[2]-cx)*grow,cy+(bb[3]-cy)*grow];
+    boxDraw(bg,E.io3(pr(t,TG+.04,TG+.32)),1-ex,44); }
+  for(const s of SPARK){ const p=pr(t,TLUM+.05,TLUM+.75); if(p<=0||p>=1) continue; const r1=lerp(30,950,E.o3(p))*s.v, r0=r1*.72;
+    glowLine(540+Math.cos(s.an)*r0,1000+Math.sin(s.an)*r0,540+Math.cos(s.an)*r1,1000+Math.sin(s.an)*r1,s.w,s.c>.4?"#fff":COL.accent,(1-p)*.95,16); }
+}
+
+/* ---------- textes ---------- */
+function rS1(t){ // « TU SAURAIS RÉSOUDRE ÇA ? » : énorme dès la première image, puis devient le titre du défi
+  const on=t<TLUM+.2; $("S1").style.display=on?"":"none"; if(!on) return;
+  const sh=E.io3(pr(t,TS1,TS1+.28)), sc=lerp(1,.46,sh), ty=lerp(0,300-560,sh), out=pr(t,TLUM-.1,TLUM+.12);
+  [["q1",0],["q2",.03]].forEach(([id,dl])=>{ const p=pr(t,dl,dl+.16), q=E.o5(p), el=$(id);
+    S(el,id==="q1"?1:cl(.9+p),`translateY(${((1-q)*(id==="q1"?-20:20)).toFixed(1)}px) scale(${lerp(1.05,1,q).toFixed(4)})`,q<1&&id==="q2"?`blur(${((1-q)*1.2).toFixed(1)}px)`:"none");
+    el.style.transformOrigin="50% 50%"; });
+  $("S1").style.transform=`translateY(${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`; $("S1").style.opacity=(1-out).toFixed(3);
+}
+function rS3(t){
+  const on=t>=TM-.05; $("S3").style.display=on?"":"none"; if(!on) return;
+  const mv=E.io3(pr(t,TF-.15,TF+.25)), L=k=>lerp(LA[k],LB[k],mv);
+  $("fLogo").style.top=L("logo")+"px"; $("f1").style.top=L("f1")+"px"; $("f2").style.top=L("f2")+"px";
+  $("slogan").style.top=lerp(LA.slogan,LB.slogan,mv)+"px"; $("fDispo").style.top=LB.dispo+"px"; $("fBar").style.top=LB.bar+"px";
+  $("ctabox").style.top=LB.cta+"px"; $("urlbox").style.top=LB.url+"px";
+  const lp=pr(t,TM,TM+.32), gl=.5+.5*Math.sin((t-TM)*2.4);
+  S($("fLogo"),cl(lp*3),`scale(${lerp(.3,1,E.back(lp)).toFixed(4)})`,`drop-shadow(0 0 ${(30+gl*24).toFixed(0)}px ${COL.electric})`);
+  $("fShine").style.transform=`translateX(${lerp(-150,330,E.io3(pr(t,TM+.45,TM+.9)))}%) skewX(-20deg)`;
+  f1C.forEach((c,i)=>{const st=TM+.02+i*.028,p=E.o5(pr(t,st,st+.36)); c.style.opacity=cl(p*2.5); c.style.transform=`translateY(${((1-p)*60).toFixed(1)}px) scale(${lerp(1.4,1,p).toFixed(3)})`; c.style.filter=p<1?`blur(${((1-p)*14).toFixed(1)}px)`:"none";});
+  f2C.forEach((c,i)=>{const st=TM+.12+i*.04,p=E.o5(pr(t,st,st+.36)); c.style.opacity=cl(p*2.5); c.style.transform=`translateY(${((1-p)*-50).toFixed(1)}px) scale(${lerp(1.5,1,p).toFixed(3)})`; c.style.filter=p<1?`blur(${((1-p)*14).toFixed(1)}px)`:"none";});
+  // COMPRENDS. PROGRESSE. : un mot par temps
+  const sOut=pr(t,TF-.2,TF);
+  [["sl1",M1],["sl2",M2]].forEach(([id,st])=>{ const p=pr(t,st,st+.22), q=E.o5(p);
+    S($(id),cl(p*3)*(1-sOut),`translateY(${((1-q)*34).toFixed(1)}px) scale(${lerp(1.35,1,q).toFixed(3)})`,p<1?`blur(${((1-q)*10).toFixed(1)}px)`:"none"); });
+  // DISPONIBLE MAINTENANT, puis l'appel à l'action
+  dispoC.forEach((c,i)=>{const st=TF+.05+i*.012,p=E.o3(pr(t,st,st+.28)); c.style.opacity=p; c.style.transform=`translateY(${((1-p)*24).toFixed(1)}px)`; c.style.filter=p<1?`blur(${((1-p)*8).toFixed(1)}px)`:"none";});
+  const dp=pr(t,TF,TF+.2), pulse=1+.3*Math.max(0,Math.sin((t-TF-.2)*Math.PI*2));
+  S($("dot"),dp,`scale(${(lerp(0,1,E.back(dp))*(t>TF+.2?pulse:1)).toFixed(3)})`);
+  $("fBar").style.width=(E.io3(pr(t,TF+.3,TF+.7))*600)+"px";
+  const cp=pr(t,TC,TC+.32); let cs=lerp(.7,1,E.back(cp)); for(const pt of [TC+.6,TE]){ cs*=1+Math.max(0,Math.sin(Math.PI*pr(t,pt,pt+.4)))*.03; }
+  S($("cta"),cl(cp*2.5),`scale(${cs.toFixed(4)})`);
+  $("ctaShine").style.transform=`translateX(${lerp(-150,420,E.io3(pr(t,TE,TE+.4))).toFixed(1)}%) skewX(-20deg)`;
+  const up=pr(t,TC+.2,TC+.5); S($("url"),cl(up*2.5),`scale(${lerp(.82,1,E.back(up)).toFixed(4)})`);
+}
+function rFx(t){
+  let f=0; for(const [c,a,i,o] of (CFG.flashes||[])){ f=Math.max(f, t<c-i?0: t<c? E.o3(pr(t,c-i,c))*a : (1-E.o3(pr(t,c,c+o)))*a); }
+  $("flash").style.opacity=f.toFixed(3);
+  let x=0,y=0; for(const [c,A] of (CFG.shakes||[])){ if(t<c) continue; const u=t-c, d=A*Math.exp(-u*9); x+=d*Math.sin(u*61); y+=d*Math.cos(u*47); }
+  const seg=[[0,1],[1,TG],[TG,TM],[TM,TF],[TF,D]].find(([a,b])=>t>=a&&t<b)||[TF,D];
+  const z=1+.04*E.io3(pr(t,seg[0],seg[1]));
+  $("world").style.transform=`translate(${x.toFixed(2)}px,${y.toFixed(2)}px) scale(${z.toFixed(4)})`;
+  let ga=.3; if(t>=TG) ga=lerp(.3,.7,pr(t,TG,TM)); if(t>=TM) ga=lerp(1,.75,pr(t,TM,TM+1.2));
+  $("glow").style.opacity=ga.toFixed(3);
+  const k=Math.floor(t*30); $("grain").style.transform=`translate(${(k*37%64)-32}px,${(k*53%64)-32}px)`;
+}
+async function renderAt(t){ drawCanvas(t); rEq(t); rS1(t); rS3(t); rFx(t); }
+window.__duration=D; window.__render=async t=>{await renderAt(t);return t;}; window.__ready=true;
+if(!location.search.includes("rendu")){
+  let t0=performance.now(); const loop=async()=>{ const t=((performance.now()-t0)/1000)%D; await renderAt(t); requestAnimationFrame(loop); };
+  const fitStage=()=>{const s=Math.min(innerWidth/1080,innerHeight/1920);$("stage").style.transform=`scale(${s})`;$("stage").style.transformOrigin="0 0";};
+  fitStage(); addEventListener("resize",fitStage); loop();
+}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+{
+ "_aide": "Pub « Le défi » (8 s) pour Mathéo Plus, entièrement générée par le code. Tout ce qui se modifie est ici : textes, instants, couleurs, flashs, secousses, effets sonores, musique.",
+ "output": {
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "bpm": 120
+ },
+ "duration": 8.0,
+ "_safeWidth": "Largeur maximale des textes (px), centrée : avec la lente poussée de caméra, il reste environ 120 px de marge de chaque côté pour l'interface TikTok.",
+ "safeWidth": 790,
+ "colors": {
+  "night": "#000000",
+  "electric": "#3D7BFF",
+  "accent": "#8DB6FF",
+  "text": "#FFFFFF",
+  "muted": "#C9D4F5"
+ },
+ "logo": "assets/logo.png",
+ "url": "avecmatheo.fr",
+ "_timeline": "Instants clés (secondes). etapes = [nom de l'étape dans assets/defi.json, instant d'apparition] : les étapes s'accélèrent (toutes les 0,4 s), puis le piège « X = −1 » reste affiché jusqu'à la réponse. Les formules se fabriquent avec python formules.py.",
+ "timeline": {
+  "etapes": [
+   [
+    "A",
+    0.0
+   ],
+   [
+    "B",
+    1.0
+   ],
+   [
+    "C",
+    1.4
+   ],
+   [
+    "D",
+    1.8
+   ],
+   [
+    "F",
+    2.2
+   ],
+   [
+    "G",
+    3.0
+   ]
+  ],
+  "barre": 2.45,
+  "lumiere": 3.8,
+  "marque": 4.0,
+  "mots": [
+   4.5,
+   5.0
+  ],
+  "final": 6.0,
+  "cta": 6.4,
+  "fin": 7.5
+ },
+ "_texts": "Textes à l'écran. ** ** = mot en bleu. Le caractère avant « ? » est une espace fine insécable.",
+ "texts": {
+  "defi": [
+   "TU SAURAIS",
+   "RÉSOUDRE **ÇA** ?"
+  ],
+  "nom": [
+   "MATHÉO",
+   "PLUS"
+  ],
+  "slogan": [
+   "COMPRENDS.",
+   "**PROGRESSE.**"
+  ],
+  "disponible": "DISPONIBLE MAINTENANT",
+  "cta": "DÉCOUVRE MATHÉO PLUS"
+ },
+ "_flashes": "Flashs : [instant, intensité 0-1, montée (s), descente (s)]. Secousses : [instant, amplitude en pixels].",
+ "flashes": [
+  [
+   0.02,
+   0.5,
+   0.02,
+   0.3
+  ],
+  [
+   3.0,
+   0.3,
+   0.03,
+   0.3
+  ],
+  [
+   4.0,
+   0.95,
+   0.05,
+   0.6
+  ],
+  [
+   7.5,
+   0.25,
+   0.03,
+   0.35
+  ]
+ ],
+ "shakes": [
+  [
+   0.02,
+   20
+  ],
+  [
+   1.0,
+   4
+  ],
+  [
+   1.4,
+   4
+  ],
+  [
+   1.8,
+   4
+  ],
+  [
+   2.2,
+   4
+  ],
+  [
+   3.0,
+   9
+  ],
+  [
+   4.0,
+   15
+  ],
+  [
+   4.5,
+   5
+  ],
+  [
+   5.0,
+   5
+  ],
+  [
+   7.5,
+   6
+  ]
+ ],
+ "_sfx": "Effets sonores fabriqués par sons.py (aucun fichier externe). at = instant (s), gain en dB. Riser : at = fin de la montée. Whoosh : at = moment où le souffle culmine.",
+ "sfx": [
+  {
+   "type": "impact",
+   "at": 0.0,
+   "size": 1.5,
+   "gain": 3
+  },
+  {
+   "type": "whoosh",
+   "at": 0.08,
+   "dur": 0.35,
+   "gain": -4
+  },
+  {
+   "type": "whoosh",
+   "at": 1.07,
+   "dur": 0.28,
+   "gain": -11
+  },
+  {
+   "type": "tick",
+   "at": 1.14,
+   "gain": -9
+  },
+  {
+   "type": "whoosh",
+   "at": 1.47,
+   "dur": 0.28,
+   "gain": -11
+  },
+  {
+   "type": "tick",
+   "at": 1.54,
+   "gain": -9
+  },
+  {
+   "type": "whoosh",
+   "at": 1.87,
+   "dur": 0.28,
+   "gain": -11
+  },
+  {
+   "type": "tick",
+   "at": 1.94,
+   "gain": -9
+  },
+  {
+   "type": "whoosh",
+   "at": 2.27,
+   "dur": 0.28,
+   "gain": -11
+  },
+  {
+   "type": "tick",
+   "at": 2.34,
+   "gain": -9
+  },
+  {
+   "type": "click",
+   "at": 2.47,
+   "gain": -8
+  },
+  {
+   "type": "riser",
+   "at": 3.0,
+   "dur": 1.6,
+   "gain": -12
+  },
+  {
+   "type": "impact",
+   "at": 3.0,
+   "size": 0.6,
+   "gain": -7
+  },
+  {
+   "type": "shimmer",
+   "at": 3.02,
+   "dur": 0.9,
+   "gain": -6
+  },
+  {
+   "type": "riser",
+   "at": 4.0,
+   "dur": 0.9,
+   "gain": -6
+  },
+  {
+   "type": "impact",
+   "at": 4.0,
+   "size": 1.5,
+   "gain": 0
+  },
+  {
+   "type": "shimmer",
+   "at": 4.05,
+   "dur": 1.4,
+   "gain": -6
+  },
+  {
+   "type": "tick",
+   "at": 4.5,
+   "gain": -8
+  },
+  {
+   "type": "tick",
+   "at": 5.0,
+   "gain": -8
+  },
+  {
+   "type": "whoosh",
+   "at": 6.0,
+   "dur": 0.4,
+   "gain": -9
+  },
+  {
+   "type": "tick",
+   "at": 6.1,
+   "gain": -8
+  },
+  {
+   "type": "tick",
+   "at": 6.45,
+   "gain": -6
+  },
+  {
+   "type": "tick",
+   "at": 6.65,
+   "gain": -8
+  },
+  {
+   "type": "impact",
+   "at": 7.5,
+   "size": 0.8,
+   "gain": -5
+  },
+  {
+   "type": "shimmer",
+   "at": 7.5,
+   "dur": 0.45,
+   "gain": -9
+  }
+ ],
+ "_music": "Musique composée par musique.py (libre de droits, usage commercial possible). Pour une musique de ton choix : python rendre.py --musique ton-fichier.mp3",
+ "music": {
+  "file": "out/musique.wav",
+  "volume": 0.6
+ },
+ "sfxVolume": 0.6,
+ "_voice": "Voix off (facultative). Ajoute les fichiers dans voix/ et des lignes {\"file\": \"voix/01.mp3\", \"at\": 0.1, \"text\": \"...\"}. Musique et effets baissent tout seuls quand la voix parle.",
+ "voice": {
+  "volume": 1.6,
+  "duckSfx": true,
+  "lines": []
+ }
+}
