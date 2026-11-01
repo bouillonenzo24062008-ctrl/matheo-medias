@@ -1,0 +1,66 @@
+{
+ "titre": "u(n+1) = 0,5 u(n) + 3 : sa limite ?",
+ "chapitre": "Suites",
+ "etapes": [
+  {
+   "tex": "$u_{n+1}=0{,}5\\,u_{n}+3$",
+   "cles": [
+    "u1",
+    "n1",
+    "pl1",
+    "one",
+    "eq",
+    "c0",
+    "cc",
+    "c5",
+    "u2",
+    "n2",
+    "pl",
+    "three"
+   ]
+  },
+  {
+   "tex": "$\\ell=0{,}5\\,\\ell+3$",
+   "cles": [
+    "l1",
+    "eq",
+    "c0",
+    "cc",
+    "c5",
+    "l2",
+    "pl",
+    "three"
+   ]
+  },
+  {
+   "tex": "$0{,}5\\,\\ell=3$",
+   "cles": [
+    "c0",
+    "cc",
+    "c5",
+    "l2",
+    "eq",
+    "three"
+   ]
+  },
+  {
+   "tex": "$\\ell=6$",
+   "cles": [
+    "l2",
+    "eq",
+    "six"
+   ]
+  }
+ ],
+ "verification": {
+  "type": "equation",
+  "equation": "x - (0.5*x + 3)",
+  "domaine": [
+   -50,
+   50
+  ],
+  "solutions": [
+   "6"
+  ]
+ }
+}

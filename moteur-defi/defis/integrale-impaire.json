@@ -1,0 +1,73 @@
+{
+ "titre": "∫ de −1 à 1 de x³ e^(x²) dx",
+ "chapitre": "Intégrales",
+ "lettres_bleues": [
+  "I"
+ ],
+ "etapes": [
+  {
+   "tex": "$\\int_{-1}^{1}x^{3}\\,\\mathrm{e}^{x^{2}}\\,\\mathrm{d}x$",
+   "cles": [
+    "int",
+    "b1",
+    "bm",
+    "b2",
+    "x",
+    "p3",
+    "e",
+    "ex",
+    "p2",
+    "d",
+    "dx"
+   ]
+  },
+  {
+   "tex": "$x^{3}\\,\\mathrm{e}^{x^{2}}\\ \\mathrm{impaire}$",
+   "cles": [
+    "x",
+    "p3",
+    "e",
+    "ex",
+    "p2",
+    "w1",
+    "w2",
+    "w3",
+    "w4",
+    "w5",
+    "w6",
+    "w7"
+   ]
+  },
+  {
+   "tex": "$I=-I$",
+   "cles": [
+    "I",
+    "eq",
+    "m3",
+    "I2"
+   ]
+  },
+  {
+   "tex": "$2I=0$",
+   "cles": [
+    "two",
+    "I",
+    "eq",
+    "z"
+   ]
+  },
+  {
+   "tex": "$I=0$",
+   "cles": [
+    "I",
+    "eq",
+    "z"
+   ]
+  }
+ ],
+ "verification": {
+  "type": "valeur",
+  "expression": "integrale(lambda t, e=exp: t**3*e(t**2), -1, 1)",
+  "valeur": "0"
+ }
+}
